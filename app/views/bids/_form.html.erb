@@ -1,0 +1,28 @@
+<div class="col-sm-10 col-sm-offset-1">
+  <%= form_for(@bid, html: {class: 'form-horizontal'}) do |f| %>
+      <% if @bid.errors.any? %>
+          <% @bid.errors.full_messages.each do |message| %>
+              <div class="alert alert-danger">
+                <%= message %>
+              </div>
+          <% end %>
+      <% end %>
+      <div class="form-group">
+        <%= f.label :auction_id, :class => 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.collection_select :auction_id, Auction.all, :id, :name, {}, {class: 'form-control'} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :price, :class => 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.number_field :price, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+          <%= f.submit :class => 'btn btn-primary' %>
+        </div>
+      </div>
+  <% end %>
+</div>

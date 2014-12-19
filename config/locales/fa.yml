@@ -1,0 +1,7 @@
+fa:
+  hello: "سلام دنیا"
+  date:
+      order:
+        - "year"
+        - "month"
+        - "day"

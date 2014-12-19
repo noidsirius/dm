@@ -1,0 +1,80 @@
+<div class="col-lg-10 col-lg-offset-1 box">
+  <p>
+    <strong>Title:</strong>
+    <%= @problem.title %>
+  </p>
+
+  <p>
+    <strong>Level:</strong>
+    <%= @problem.level.name %>
+    <strong>Price:</strong>
+    <%= @problem.level.price %>
+    <strong>Bounty:</strong>
+    <%= @problem.level.bounty %>
+    <strong>Topics:</strong>
+    <% @problem.chapters.each do |c|%>
+    <%= c.title %>
+    <% end %>
+
+  </p>
+<p>
+  <strong>Topics:</strong>
+  <% @problem.chapters.each do |c|%>
+      <%=link_to c.title, c %>
+  <% end %>
+
+</p>
+
+  <p>
+  <% if @problem.can_view(current_user.profile) %>
+      <p>
+        <% if @problem.auction_mode?() %>
+            <% if @problem.auction.is_started?() %>
+                <strong>Description:</strong>
+                <%= @problem.Description %>
+            <% end %>
+            <br>
+            Auction:
+            <%= link_to @problem.auction.name, @problem.auction %>
+        <% else %>
+          <strong>Description:</strong>
+           <%= @problem.Description %>
+        <% end %>
+      </p>
+   <% end %>
+
+  </p>
+  <% if @problem.can_submit(current_user.profile) %>
+      <p>
+          <% last_submission = @problem.submissions.where("profile_id = ?", current_user.profile.id).last %>
+          <% if last_submission and last_submission.status == 2 %>
+              Accepted!
+          <% elsif last_submission and last_submission.status == 0%>
+              <p> Please Wait!</p>
+          <% else %>
+            <a id="submit-btn" data-toggle="modal" data-target="#main-modal" class="btn btn-danger">Submit</a>
+          <% end %>
+          <% @problem.submissions.where("profile_id = ?", current_user.profile.id).reverse_each do |submission| %>
+              <p>
+
+                <strong>Submission:</strong>
+                <%= submission.description %> - <%= submission.created_at %>
+
+              </p>
+          <% end %>
+      </p>
+  <% end %>
+  <% if @problem.can_buy(current_user.profile) %>
+      <%= link_to 'Buy', {:controller => 'problems', :action => 'buy', :id => String(@problem.id)}, :back_to => @problem, :method => :put, :class => 'btn btn-primary follow-btn' %>
+  <% end %>
+</div>
+
+<% content_for :extra_js do %>
+    <script type="text/javascript" language="JavaScript">
+        $('#submit-btn').click(function () {
+            $.get('/submissions/new?problem_id=' + <%= @problem.id %>, function (data) {
+                $('#main-modal-body').html(data);
+            });
+        });
+    </script>
+<% end %>

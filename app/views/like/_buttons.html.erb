@@ -1,0 +1,5 @@
+<% if current_user.profile.voted_for? likable %>
+    <%= link_to '<i class="fa fa-thumbs-o-down fa-fw"></i>Unlike'.html_safe, url_for(likable) + '/unlike/', :remote => true, :method => :post, :class => 'btn btn-danger' %>
+<% else %>
+    <%= link_to '<i class="fa fa-thumbs-o-up fa-fw"></i>Like'.html_safe, url_for(likable) + '/like/', :remote => true, :method => :post, :class => 'btn btn-danger' %>
+<% end %>

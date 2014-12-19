@@ -1,0 +1,46 @@
+<div class="sign-notice">Sign in to UTACM</div>
+<%= form_for(resource, as: resource_name, :html => {:class => 'form-horizontal'}, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <%= f.label :email, :class => 'col-sm-4 control-label' %>
+      <div class="col-sm-8">
+        <%= f.email_field :email, :autofocus => true, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, :class => 'col-sm-4 control-label' %>
+      <div class="col-sm-8">
+        <%= f.password_field :password, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox" style="height: 27px">
+              <label>
+                <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+              </label>
+            </div>
+          </div>
+        </div>
+    <% end -%>
+
+    <div class="form-group">
+      <div class="col-sm-4 oauth-box">
+        <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-info">
+          <i class="fa fa-facebook fa-fw"></i>Facebook</a>
+        <a href="<%= user_omniauth_authorize_path(:google_oauth2) %>" class="btn btn-danger">
+          <i class="fa fa-google-plus fa-fw"></i>Google</a>
+      </div>
+      <div class="col-sm-8">
+        <button class="btn btn-primary" type="submit">
+          Sign in
+          <i class="fa fa-sign-in fa-fw"></i>
+        </button>
+        <p></p>
+
+        <div><%= link_to 'Register', new_registration_path(resource_name) %></div>
+        <div><%= link_to 'Forgot your password?', new_password_path(resource_name) %></div>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,60 @@
+
+@import 'color-plate.css.less';
+
+.ui-pnotify {
+    top: 70px;
+    right: 20px;
+    position: absolute;
+    height: auto;
+    z-index: 9999;
+}
+
+/* Hides position: fixed from IE6 */
+html > body > .ui-pnotify {
+    position: fixed;
+}
+
+.ui-pnotify-container {
+    background-position: 0 0;
+    padding: .8em;
+    height: 100%;
+    margin: 0;
+}
+
+.ui-pnotify-sharp {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.ui-pnotify-title {
+    display: block;
+    margin-bottom: .4em;
+    margin-top: 0;
+}
+
+.ui-pnotify-text {
+    display: block;
+}
+
+.ui-pnotify-icon, .ui-pnotify-icon span {
+    display: block;
+    float: left;
+    margin-right: .2em;
+}
+
+/* Alternate stack initial positioning. */
+.ui-pnotify.stack-topleft, .ui-pnotify.stack-bottomleft {
+    left: 25px;
+    right: auto;
+}
+
+.ui-pnotify.stack-bottomright, .ui-pnotify.stack-bottomleft {
+    bottom: 25px;
+    top: auto;
+}
+
+.ui-pnotify-closer, .ui-pnotify-sticker {
+    float: right;
+    margin-left: .2em;
+}

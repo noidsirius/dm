@@ -1,0 +1,816 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap.min
+ *= require font-awesome.min
+ *= require chosen
+ *= require pnotify
+ *= require bootstrap-editable
+ *= require_tree .
+ *= require_self
+ */
+@import "color-plate.css.less";
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Lato Hairline'), local('Lato-Hairline'), url('lato-100.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url('lato-300.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url('lato-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url('lato-700.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Lato Black'), local('Lato-Black'), url('lato-900.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 100;
+  src: local('Lato Hairline Italic'), local('Lato-HairlineItalic'), url('lato-i-100.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Lato Light Italic'), local('Lato-LightItalic'), url('lato-i-300.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url('lato-i-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url('lato-i-700.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 900;
+  src: url('lato-i-900.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('glyphicons-halflings-regular.eot');
+  src: url('glyphicons-halflings-regular.woff') format('woff');
+}
+
+* {
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -ms-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#main-navbar {
+  position: relative;
+  z-index: 1030;
+  margin: 0;
+}
+
+.fast-transition {
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.secondary-navbar {
+  .no-transition();
+  &.affix-top {
+    position: absolute;
+    top: 50px;
+  }
+  &.affix {
+    position: fixed;
+    top: 0;
+  }
+  .shadow();
+  min-height: 40px;
+  height: 40px;
+  border-radius: 0;
+  margin: 0;
+  background-color: @brand-primary;
+  width: 100%;
+  z-index: 1010;
+  > .container {
+    padding: 0;
+    > div {
+      padding: 0;
+    }
+  }
+  .navbar-nav {
+    height: 40px;
+    > .active {
+      > a {
+        font-size: 18px;
+        font-weight: 400;
+        border-bottom: 3px solid @wet-asphalt;
+        .fast-transition();
+        &:hover {
+          border-bottom: 5px solid @wet-asphalt;
+        }
+      }
+    }
+    > li {
+      > a {
+        font-size: 16px;
+        font-weight: 300;
+        padding: 10px 15px;
+        height: 40px;
+        background-color: transparent;
+        color: #fff;
+        .fast-transition();
+        &:hover {
+          color: @wet-asphalt;
+          border-bottom: 3px solid @wet-asphalt;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.no-transition {
+  -webkit-transition: 0s;
+  -moz-transition: 0s;
+  -ms-transition: 0s;
+  -o-transition: 0s;
+  transition: 0s;
+}
+
+.shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shadowed-hover {
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.alert {
+  .shadow();
+}
+
+#main-container {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -30px;
+}
+
+#contenter {
+  padding-top: 50px;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.box {
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 30px;
+  .shadow();
+  font-family: 'Lato';
+}
+
+.comments-box {
+  border-radius: 0 0 4px 4px;
+  background-color: #fcfcfc;
+  border-top: 1px solid #eee;
+  .shadow();
+  > .comment-box {
+    padding: 10px 10px 10px 60px;
+    position: relative;
+    min-height: 60px;
+    &:first-child {
+      border-top: none;
+    }
+    .commenter {
+      font-weight: bold;
+      font-size: 13px;
+      display: inline-block;
+    }
+    .date {
+      font-weight: 300;
+      font-size: 12px;
+      display: inline-block;
+    }
+    .content {
+      font-size: 13px;
+      color: #444;
+      display: inline-block;
+    }
+    .comment-delete {
+      position: absolute;
+      top: 2px;
+      right: 6px;
+    }
+    > .commenter-pic-box {
+      position: absolute;
+      left: 10px;
+      width: 40px;
+      height: 40px;
+      > img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 640px) {
+  .box {
+    margin-top: 0;
+  }
+}
+
+.username {
+  .text-ellipsis();
+}
+
+.username-box {
+  .username();
+  min-width: 200px;
+  position: relative;
+  border: none;
+  height: 34px;
+  padding-left: 46px;
+  > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+  }
+}
+
+.reg-footer {
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: #fff;
+}
+
+.sign-notice {
+  text-align: center;
+  font-size: 24px;
+  padding-bottom: 24px;
+}
+
+.box-paddingless {
+  .box();
+  padding: 0;
+
+  > h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+  }
+}
+
+.profile {
+  .box-paddingless ();
+  width: 80%;
+  margin-left: 10%;
+  display: table;
+
+  > .profile-picture {
+    display: table-cell;
+    height: 150px;
+    width: 150px;
+    position: relative;
+    &:hover {
+      > form > .change-avatar-input > {
+        opacity: 0.8;
+      }
+    }
+    > img {
+      width: 150px;
+      height: 150px;
+      border-radius: 4px 0 0 4px;
+    }
+  }
+
+  > .profile-info {
+    display: table-cell;
+    height: 100%;
+    vertical-align: top;
+    padding: 10px 10px 0;
+    > .top-info {
+      display: table;
+      width: 100%;
+      height: 40px;
+
+      > div {
+        display: table-cell;
+        width: 50%;
+        float: left;
+      }
+
+      > .username {
+        font-size: 24px;
+        font-weight: 700;
+        height: 40px;
+        .text-ellipsis();
+      }
+
+      > .info {
+        font-size: 18px;
+        font-weight: 300;
+        text-align: right;
+        padding: 7px 10px 0 0;
+      }
+    }
+
+    > .bio {
+      font-weight: 300;
+      font-size: 14px;
+    }
+
+    > .desc {
+      padding-top: 4px;
+      font-weight: 300;
+      font-size: 16px;
+      height: 72px;
+      overflow: hidden;
+      > ul {
+        padding-left: 20px;
+      }
+    }
+  }
+}
+
+.card-container {
+  margin: 0 auto;
+  vertical-align: top;
+  > .card-col {
+    float: left;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;
+    margin: 20px 10px;
+    width: 272px;
+  }
+}
+
+.card {
+  .box-paddingless();
+  .shadowed-hover();
+
+  &.card-arbit {
+    margin: 10px;
+  }
+
+  float: left;
+  width: 272px;
+  margin: 0 0 20px;
+  padding: 0 0 10px;
+  font-size: 22px;
+  position: relative;
+
+  &.wide {
+    width: 370px;
+  }
+
+  &.small {
+    width: 214px;
+  }
+
+  > img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px 4px 0 0;
+  }
+
+  &.padded {
+    > img {
+      padding: 15px;
+    }
+  }
+
+  > .mosaik {
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+    > img {
+      width: 50%;
+      float: left;
+    }
+  }
+
+  > .card-small-pip {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0.8;
+    border: 2px solid #f7f7f7;
+    z-index: 500;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    > img {
+      margin-top: -2px;
+      margin-left: -2px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  > .username,
+  > .name {
+    margin-top: 10px;
+    text-align: center;
+    padding: 0 15px;
+    font-weight: 700;
+    height: 31px;
+    width: 100%;
+    -webkit-transition: 0s;
+    -moz-transition: 0s;
+    -ms-transition: 0s;
+    -o-transition: 0s;
+    transition: 0s;
+    .text-ellipsis();
+  }
+
+  > .sub-name {
+    font-weight: 300;
+    text-align: center;
+    font-size: 13px;
+    .text-ellipsis();
+  }
+
+  > .desc {
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: 4px;
+    padding: 0 15px;
+    height: 65px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  > .follow-btn {
+    margin-left: 25%;
+    width: 50%;
+  }
+
+  > .follow-full-btn {
+    margin-left: 10%;
+    width: 80%;
+  }
+
+  > .btn-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 34px;
+    > .card-btn {
+      width: 34px;
+      margin-bottom: 4px;
+      padding: 6px 10px;
+      display: none;
+    }
+  }
+
+  > .destroy-card {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: @alizarin;
+    border-radius: 50%;
+    display: none;
+    background-color: transparent;
+  }
+
+  &:hover {
+    > .destroy-card {
+      display: block;
+    }
+
+    > .btn-container > .card-btn {
+      display: block;
+    }
+  }
+
+  > .has-it-check {
+    position: absolute;
+    top: 186px;
+    right: 8px;
+  }
+}
+
+.card-pic {
+  width: 214px;
+  height: 214px;
+}
+
+.oauth-box {
+  margin: 0;
+  > a {
+    display: block;
+    margin-bottom: 8px;
+    width: 100%;
+    position: relative;
+    > i {
+      font-size: 24px;
+      line-height: 34px;
+      position: absolute;
+      left: 2px;
+      top: 0;
+    }
+  }
+}
+
+.navbar-logo {
+  &:hover {
+    background-color: @turquoise;
+  }
+}
+
+.round-background {
+  border-radius: 50%;
+  background: @turquoise;
+}
+
+button > .navbar-unread {
+  right: 3px;
+  top: 2px;
+  color: inherit;
+  background-color: @brand-danger;
+}
+
+.navbar-btn {
+  &.danger {
+    color: @brand-danger;
+  }
+
+  &.counted-btn {
+    position: relative;
+    padding-right: 20px;
+  }
+
+  > .count {
+    font-size: 10px;
+    font-weight: 300;
+    padding: 3px;
+    background-color: @turquoise;
+    position: absolute;
+    top: 1px;
+    right: 2px;
+    height: 16px;
+    line-height: 10px;
+    color: @midnight-blue;
+    border-radius: 50%;
+  }
+}
+
+#notif-btn {
+  -webkit-transition: 0s;
+  -moz-transition: 0s;
+  -ms-transition: 0s;
+  -o-transition: 0s;
+  transition: 0s;
+}
+
+.date-select {
+  padding: 7px 15px;
+  > select {
+    width: auto;
+  }
+}
+
+.middle {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-form {
+  width: 40%;
+}
+
+.col-pad-right {
+  padding-left: 0;
+}
+
+.col-pad-left {
+  padding-right: 0;
+}
+
+.box-container {
+  border-radius: 4px 4px 0 0;
+  background-color: #fff;
+  padding: 10px;
+  font-family: 'Lato';
+  .shadow();
+  &.radius {
+    border-radius: 4px;
+  }
+}
+
+.property-picturebox {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  .shadow();
+
+  > img {
+    width: 100%;
+    background-color: #fff;
+  }
+
+  > .likebtn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 50%;
+    > .btn {
+      width: 80%;
+    }
+  }
+
+  > #likes {
+    width: 75px;
+    border-radius: 4px;
+    padding: 7px 10px;
+    .shadow();
+    background-color: #fff;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-weight: 300;
+  }
+}
+
+.push {
+  height: 50px;
+}
+
+.footer {
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+  height: 30px;
+  > .copy {
+    color: #333;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+  }
+}
+
+.multipic {
+  position: relative;
+  display: block;
+  width: 220px;
+
+  &.top {
+    height: 172px;
+    img {
+      width: 214px;
+    }
+  }
+
+  &.bot {
+    height: 257px;
+    img {
+      width: 214px;
+    }
+  }
+
+  > img {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+  }
+}
+
+.typeahead {
+}
+
+.tt-query {
+}
+
+.tt-hint {
+  color: #green;
+}
+
+.tt-dropdown-menu {
+  .shadow();
+  width: 100%;
+  margin-top: 4px;
+  overflow: hidden;
+  background-color: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+.tt-suggestion {
+  font-size: 14px;
+  line-height: 28px;
+  height: 36px;
+  padding: 3px 12px 4px;
+  cursor: pointer;
+
+  .no-transition();
+  > img {
+    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+    margin-right: 6px;
+    display: inline-block;
+  }
+  > .name {
+    display: inline-block;
+    line-height: 28px;
+    .no-transition();
+  }
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: @alizarin;
+}
+
+.tt-dataset-people {
+  strong {
+    .no-transition();
+  }
+}
+
+.problem-list {
+  margin: 10px 10%;
+  width: 80%;
+
+  .fill {
+    width: 100%;
+    padding: 15px;
+  }
+}

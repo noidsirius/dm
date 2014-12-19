@@ -1,0 +1,64 @@
+<div class="col-lg-10 col-lg-offset-1 box">
+  <% if current_user.has_role?(:admin) %>
+      <a id="new-problem" class="btn btn-danger" data-toggle="modal" data-target="#main-modal"><i class="fa fa-plus fa-fw"></i>
+        New Problem</a>
+  <% end %>
+  <p></p>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Status</th>
+      <th>Title</th>
+      <th>Level</th>
+      <% if current_user.has_role?(:admin) %>
+          <th colspan="2"></th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <% @problems.each do |problem| %>
+        <tr>
+          <% if problem.submissions.where("status = 2 and profile_id = ? ", current_user.profile.id).any? %>
+              <td><i class="fa fa-check-circle has-it-check" style="color: #1abc9c"></i></td>
+          <% elsif problem.auction_mode? %>
+            <% if !problem.auction.is_started? %>
+                <td><i class="fa fa-clock-o has-it-check" style="color: #1abc9c"></i></td>
+            <% elsif problem.auction.is_finished? %>
+                <% if problem.auction.bids.count > 0 %>
+                    <% if problem.auction.bids.last.profile != current_user.profile %>
+                        <td><i class="fa fa-times has-it-check" style="color: #1abc9c"></i></td>
+                    <% else  %>
+                        <td><i class="fa fa-exclamation has-it-check" style="color: #1abf44"></i></td>
+                    <% end %>
+                <% else %>
+                    <td><i class="fa fa-times has-it-check" style="color: #1abc9c"></i></td>
+                <% end %>
+            <% else %>
+                <td><i class="fa fa-money has-it-check" style="color: #1abc9c"></i></td>
+            <% end %>
+          <% elsif problem.can_view(current_user.profile) %>
+            <td><i class="fa fa-exclamation has-it-check" style="color: #1abf44"></i></td>
+          <% else %>
+            <td> </td>
+          <% end %>
+
+          <td><%= link_to problem.title, problem %></td>
+          <td><%= problem.level.name %></td>
+          <% if current_user.has_role?(:admin) %>
+              <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
+              <td><%= link_to 'Destroy', problem, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<% content_for :extra_js do %>
+    <script language="JavaScript">
+        $('#new-problem').click(function () {
+            $.get('<%= new_problem_path %>', function (data) {
+                $('#main-modal-body').html(data);
+            });
+        });
+    </script>
+<% end %>

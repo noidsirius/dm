@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title><%= content_for?(:title) ? yield(:title) : 'UTACM' %></title>
+
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <style>
+      body {
+          padding-top: 100px;
+          background-image: url(<%= asset_path 'assets/back.jpg' %>);
+          background-size: 100% auto;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="box col-lg-6 col-lg-offset-3">
+      <% if notice %>
+          <div data-alert class="alert alert-info">
+            <%= notice %>
+          </div>
+      <% end %>
+      <% if alert %>
+          <div data-alert class="alert alert-warning">
+            <%= alert %>
+          </div>
+      <% end %>
+      <% if devise_error_messages! != '' %>
+          <div data-alert class="alert alert-danger">
+            <%= devise_error_messages! %>
+          </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+<div class="reg-footer">All rights reserved by Dressr&trade;</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<div class="col-lg-10 col-lg-offset-1 box">
+  <% if current_user.has_role?(:admin) %>
+      <%= link_to 'New Chapter', new_chapter_path, :class => 'btn btn-danger' %>
+      <p></p>
+  <% end %>
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+      <th>Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @chapters.each do |chapter| %>
+        <tr>
+          <td><%= link_to chapter.title, chapter %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

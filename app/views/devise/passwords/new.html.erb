@@ -1,0 +1,21 @@
+<div class="sign-notice">Forgot your password?</div>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {class: 'form-horizontal', method: :post}) do |f| %>
+    <% if devise_error_messages! != '' %>
+        <div class="alert alert-danger"><%= devise_error_messages! %></div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :email, :class => 'col-sm-4 control-label' %>
+      <div class="col-sm-8">
+        <%= f.email_field :email, :autofocus => true, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-8 col-sm-offset-4">
+        <%= f.submit 'Send me reset password instructions', :class => 'btn btn-primary' %>
+        <p></p>
+        <%= link_to 'Back to login', new_session_path(resource_name) %>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @chapter.title %>
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Status</th>
+    <th>Title</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @chapter.problems.each do |problem| %>
+      <tr>
+
+        <td><%= link_to problem.title, problem %></td>
+        <td><%= problem.level.name %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+</p>
+
+<%= link_to 'Edit', edit_chapter_path(@chapter) %> |
+<%= link_to 'Back', chapters_path %>

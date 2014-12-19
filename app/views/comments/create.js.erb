@@ -1,0 +1,21 @@
+$('#comments').append('<%= j render partial: 'comments/comment', locals: {comment: @comment} %>');
+$('#comment_content').val('');
+(function () {
+    $(function () {
+        return $("[data-xeditable=true]").each(function () {
+            return $(this).editable({
+                ajaxOptions: {
+                    type: "PATCH",
+                    dataType: "json"
+                },
+                params: function (params) {
+                    var railsParams;
+                    railsParams = {};
+                    railsParams[$(this).data("model")] = {};
+                    railsParams[$(this).data("model")][params.name] = params.value;
+                    return railsParams;
+                }
+            });
+        });
+    });
+}).call();

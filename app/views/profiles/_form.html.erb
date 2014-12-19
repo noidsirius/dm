@@ -1,0 +1,67 @@
+<%= form_for(@profile, html: {class: 'form-horizontal'}) do |f| %>
+    <div class="profile-form box middle">
+      <% if @profile.errors.any? %>
+          <% @profile.errors.full_messages.each do |msg| %>
+              <div class="alert alert-danger">
+                <%= msg %>
+              </div>
+          <% end %>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :first_name, :class => 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+          <%= f.text_field :first_name, :autofocus => true, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, :class => 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+          <%= f.text_field :last_name, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :username, :class => 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <div class="input-group-addon">@</div>
+            <%= f.text_field :username, :class => 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :birthday, :class => 'col-sm-3 control-label' %>
+        <div class="col-sm-9 date-select">
+          <%= f.date_select :birth_day, {:with_css_classes => true, :start_year => Date.today.year - 100, :end_year => Date.today.year - 10} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :gender, :class => 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+          <label class="radio-inline">
+            <%= f.radio_button :is_female, 'false' %>Male
+          </label>
+          <label class="radio-inline">
+            <%= f.radio_button :is_female, 'true' %>Female
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :info, :class => 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+          <%= f.text_area :info, :class => 'form-control', size: 'x2' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :about, :class => 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+          <%= f.text_area :about, :class => 'form-control', size: 'x5' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <%= f.submit :class => 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+<% end %>

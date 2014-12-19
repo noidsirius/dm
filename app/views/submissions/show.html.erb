@@ -1,0 +1,27 @@
+<div class="col-lg-10 col-lg-offset-1 box">
+  <p>
+    <strong>Submission:</strong>
+    <%= @submission.id %>
+  </p>
+  <p>
+  <strong>Profile:</strong>
+  <%= @submission.profile.username %>
+</p>
+
+<p>
+  <strong>Problem:</strong>
+  <%= link_to @problem.title, @problem %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @submission.status %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @submission.description %>
+</p>
+
+<%= link_to 'Back', @submission.problem, :class => 'btn btn-danger' %>
+</div>

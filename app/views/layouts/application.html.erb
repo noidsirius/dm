@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : 'UTACM' %></title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <% if not @navbar or not @navbar[:second] %>
+      <style>
+          #contenter {
+              padding-top: 10px;
+          }
+      </style>
+  <% end %>
+</head>
+<body>
+<div class="modal fade" id="main-modal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body" style="display: table; width: 100%">
+        <div class="container-fluid" id="main-modal-body"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          <i class="fa fa-times"></i>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" id="main-container">
+  <div class="row">
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation" id="main-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="/discover">Discover</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <% if @navbar and @navbar[:second] %>
+        <nav class="navbar secondary-navbar affix-top" data-spy="affix" data-offset-top="50">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <% @navbar[:second].each do |entry| %>
+                    <%= entry.html_safe %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    <% end %>
+  </div>
+  <div class="container">
+    <div class="row" id="contenter">
+      <% if notice %>
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= notice %>
+          </div>
+      <% end %>
+      <% if alert %>
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= alert %>
+          </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+  <div class="push"></div>
+</div>
+<div class="footer">
+  <div class="copy">
+    UTACM&trade; was made by
+    <a href="https://twitter.com/mohibeyki">@mohibeyki</a> &
+    <a href="https://twitter.com/noidsaleh">@noidsaleh</a>
+    with Ruby on Rails &middot; PostgreSQL &middot; Bootstrap &middot; FontAwesome &middot; 2014 &copy;
+  </div>
+</div>
+<%= javascript_include_tag 'application', 'http://localhost:9292/faye.js', 'data-turbolinks-track' => true %>
+<script type="text/javascript" lang="javascript">
+    var notifUl = $('#notif-ul'),
+            noNewNotifText = '<li><a>No new notification</a></li>',
+            removeAllBtn = '<li><a onclick="removeAll()" style="cursor: pointer">Remove all<i class="fa fa-times fa-fw"></i></a></li>',
+            notifBtn = $('#notif-btn'),
+            unreadNotif = $('#notif-unread');
+
+    function addNew(text) {
+        if (notifUl) {
+            if (notifUl.html().trim() == noNewNotifText) {
+                notifUl.html(removeAllBtn);
+                notifUl.append('<li><a href="#fake">' + text + '</a></li>');
+            }
+            else
+                notifUl.append('<li><a href="#fake">' + text + '</a></li>');
+        }
+    }
+
+    function removeAll() {
+        notifUl.html(noNewNotifText);
+    }
+
+    function markAsRead() {
+        notifBtn.removeClass('danger');
+        unreadNotif.hide();
+    }
+
+    $(function () {
+        var fayeClient = new Faye.Client('http://localhost:9292/faye');
+        var clientAuth = {
+            outgoing: function (message, callback) {
+                if (message.channel !== '/meta/subscribe')
+                    return callback(message);
+
+                if (!message.ext) message.ext = {};
+                message.ext.authToken = '<%= Digest::SHA1.hexdigest(String(current_user.id)) %>';
+                callback(message);
+            }
+        };
+
+        fayeClient.addExtension(clientAuth);
+        fayeClient.subscribe('/notifications/<%= current_user.id %>', function (data) {
+            notifBtn.addClass('danger');
+            unreadNotif.show();
+            addNew(data);
+            new PNotify({
+                text: data,
+                title: false,
+                icon: false,
+                type: 'error'
+            });
+        });
+
+        notifUl.html(noNewNotifText);
+        notifBtn.click(function () {
+            markAsRead();
+        });
+    });
+
+    var people = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: '/search/%QUERY.json'
+    });
+
+    people.initialize();
+    var searchIn = $('#search-input');
+    searchIn.typeahead({
+        highlight: true
+    }, {
+        name: 'people',
+        displayKey: function (obj) {
+            return obj.first + ' ' + obj.last;
+        },
+        source: people.ttAdapter(),
+        templates: {
+            suggestion: Handlebars.compile('<img src="{{avatar}}"><div class="name">{{first}} {{last}}</div>')
+        }
+    }).on('typeahead:selected', function (obj, datum) {
+        window.location.href = '/' + datum.username;
+    });
+</script>
+<%= yield :extra_js %>
+</body>
+</html>

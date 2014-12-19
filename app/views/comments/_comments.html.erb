@@ -1,0 +1,31 @@
+<div id="comments" class="comments-box">
+  <% @comments.each do |comment| %>
+      <%= render comment %>
+  <% end %>
+</div>
+<div class="comments-box">
+  <div class="comment-box">
+    <div class="commenter-pic-box">
+      <img src="<%= current_user.profile.avatar.small.url %>" alt="<%= current_user.profile.username %>'s avatar" data-at2x="<%= current_user.profile.avatar.small_2x.url %>">
+    </div>
+    <div class="comment">
+      <div class="commenter">
+        <%= link_to '@' + current_user.profile.username, current_user.profile %>
+      </div>
+      <%= form_for [commentable, @new_comment], html: {class: 'form-horizontal'}, remote: true do |f| %>
+          <% if @new_comment.errors.any? %>
+              <% if @new_comment.errors.any? %>
+                  <% @new_comment.errors.full_messages.each do |msg| %>
+                      <div class="alert alert-danger">
+                        <%= msg %>
+                      </div>
+                  <% end %>
+              <% end %>
+          <% end %>
+
+          <%= f.text_field :content, :class => 'form-control input-sm', :style => 'margin-top: 2px;' %>
+          <%= f.submit :style => 'display:none' %>
+      <% end %>
+    </div>
+  </div>
+</div>

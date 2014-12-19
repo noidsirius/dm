@@ -1,0 +1,30 @@
+<% if @profiles and @profiles.length > 0 %>
+    <% for profile in @profiles %>
+        <div class="card card-arbit small">
+          <img src="<%= profile.avatar.card.url %>" alt="<%= profile.username %>'s avatar" data-at2x="<%= profile.avatar.card_2x.url %>">
+
+          <div class="username text-fill"><a href="/<%= profile.username %>">@<%= profile.username %></a></div>
+          <div class="sub-name">
+            <%= profile.first_name %> <%= profile.last_name %> &middot;
+            <% if profile.is_female %>
+                Female
+            <% else %>
+                Male
+            <% end %>
+            &middot; <%= profile.get_age %>
+          </div>
+          <div class="desc"><%= profile.info %></div>
+          <% if profile == current_user.profile %>
+              <a class="btn btn-primary follow-btn disabled">You</a>
+          <% else %>
+              <% if current_user.profile.following.include?(profile) %>
+                  <%= link_to 'Unfollow', {:controller => 'profiles', :action => 'unfollow', :id => String(profile.id)}, :back_to => 'follow_list', :method => :delete, :class => 'btn btn-danger follow-btn' %>
+              <% else %>
+                  <%= link_to 'Follow', {:controller => 'profiles', :action => 'follow', :id => String(profile.id)}, :back_to => 'follow_list', :method => :patch, :class => 'btn btn-primary follow-btn' %>
+              <% end %>
+          <% end %>
+        </div>
+    <% end %>
+<% else %>
+    <div class="alert alert-danger"><%= t 'no_one_found' %></div>
+<% end %>

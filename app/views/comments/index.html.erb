@@ -1,0 +1,14 @@
+<% @comments.each do |comment| %>
+    <div class="col-sm-12 box comment-box">
+      <% if comment.profile %>
+          <%= link_to comment.profile.username, comment.profile %>
+      <% end %>:
+      <%= comment.content %>
+      <%= link_to "Edit", {controller: "comments", action: "edit", id: comment.id}, method: :get %>
+      |
+      <%= link_to "Delete", {controller: "comments", action: "destroy", id: comment.id}, method: :delete %>
+    </div>
+<% end %>
+<div class="col-sm-12" style="padding: 10px">
+  <%= link_to '<i class="fa fa-plus fa-fw"></i> Add a new comment'.html_safe, [:new, @commentable, :comment], :class => 'btn btn-danger' %>
+</div>

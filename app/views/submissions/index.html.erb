@@ -1,0 +1,40 @@
+<div class="col-lg-10 col-lg-offset-1 box">
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Submission</th>
+      <th>Profile</th>
+      <th>Problem</th>
+      <th>Status</th>
+
+      <% if current_user.has_role?(:admin) %>
+          <th colspan="3"></th>
+      <% end %>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @submissions.each do |submission| %>
+        <tr>
+            <td><%= link_to submission.id, submission%> </td>
+          <td><%= link_to submission.profile.username, submission.profile %></td>
+          <td><%= link_to submission.problem.title, submission.problem %></td>
+          <td><% if submission.status == 2 %>
+                    Accepted!
+                <% elsif submission.status == 1 %>
+                    Wrong!
+                <% else %>
+                    Wait for it...
+                <% end %>
+
+                </td>
+
+          <% if current_user.has_role?(:admin) %>
+              <td><%= link_to 'Accept', {:controller => 'submissions', :action => 'accept', :id => String(submission.id), :pid => String(submission.profile.id)}, :back_to => submissions_path, :method => :put, :class => 'btn btn-primary follow-btn' %></td>
+              <td><%= link_to 'Reject', {:controller => 'submissions', :action => 'reject', :id => String(submission.id), :pid => String(submission.profile.id)}, :back_to => submissions_path, :method => :put, :class => 'btn btn-primary follow-btn' %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

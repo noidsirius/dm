@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  base_price: 1
+  start_time: 2014-05-22 08:21:39
+  end_time: 2014-05-22 08:21:39
+  problem_id: 1
+
+two:
+  name: MyString
+  base_price: 1
+  start_time: 2014-05-22 08:21:39
+  end_time: 2014-05-22 08:21:39
+  problem_id: 1

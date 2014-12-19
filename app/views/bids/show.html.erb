@@ -1,0 +1,19 @@
+<div class="col-lg-6 col-lg-offset-3 box">
+  <p>
+    <strong>Bidder:</strong>
+    <%= @bid.profile.first_name %> <%= @bid.profile.last_name %>
+  </p>
+
+  <p>
+    <strong>Auction:</strong>
+    <%= link_to @bid.auction.name, @bid.auction %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= @bid.price %>
+  </p>
+
+  <%= link_to 'Edit', edit_bid_path(@bid), :class => 'btn btn-danger' %>
+  <%= link_to 'Back', bids_path, :class => 'btn btn-primary' %>
+</div>

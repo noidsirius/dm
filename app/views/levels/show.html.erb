@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @level.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @level.price %>
+</p>
+
+<p>
+  <strong>Bounty:</strong>
+  <%= @level.bounty %>
+</p>
+
+<%= link_to 'Edit', edit_level_path(@level) %> |
+<%= link_to 'Back', levels_path %>

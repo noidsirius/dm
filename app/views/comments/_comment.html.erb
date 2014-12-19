@@ -1,0 +1,26 @@
+<div id="comment<%= comment.id %>" class="comment-box">
+  <div class="commenter-pic-box">
+    <img src="<%= comment.profile.avatar.small.url %>" alt="<%= comment.profile.username %>'s avatar" data-at2x="<%= comment.profile.avatar.small_2x.url %>">
+  </div>
+  <div class="comment">
+    <div>
+      <div class="commenter">
+        <%= link_to '@' + comment.profile.username, comment.profile %>
+      </div>
+      <div class="date">
+        <% if comment.days_ago == 0 %>
+            Today
+        <% elsif comment.days_ago == 1 %>
+            yesterday
+        <% else %>
+            <%= comment.days_ago %> days ago
+        <% end %>
+        <%= comment.created_at.in_time_zone('Tehran').strftime('%I:%M %p') %>
+      </div>
+    </div>
+    <div class="content" data-xeditable="<%= current_user.profile == comment.profile %>" data-pk="<%= comment.id %>" data-model="comment" data-name="content" data-url="<%= url_for(@commentable) %>/comments/<%= comment.id %>" data-title="Change content">
+      <%= comment.content %>
+    </div>
+    <%= link_to '<i class="fa fa-times"></i>'.html_safe, {controller: 'comments', action: 'destroy', id: comment.id}, method: :delete, remote: true, :class => 'comment-delete' %>
+  </div>
+</div>

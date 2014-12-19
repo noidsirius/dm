@@ -1,0 +1,120 @@
+<div class="col-lg-6 col-lg-offset-3 box">
+  <p>
+    <strong>Name:</strong>
+    <%= @auction.name %>
+  </p>
+
+  <p>
+    <strong>Base price:</strong>
+    <%= @auction.base_price %>
+  </p>
+
+  <p>
+    <strong>Start time:</strong>
+    <%= @auction.start_time.localtime.to_s(:time) %>
+  </p>
+
+  <p>
+    <strong>End time:</strong>
+    <%= @auction.end_time.localtime.to_s(:time) %>
+  </p>
+
+  <p>
+    <% if @target_label != "NONE" %>
+        <strong>Remaining to <%= @target_label %>: </strong>
+
+        <span id="hour"><%= ((@target_time - Time.now)/3600).floor.to_s.rjust(2, '0') %></span>
+        :
+        <span id="min"><%= (((@target_time - Time.now)%3600) / 60).floor.to_s.rjust(2, '0') %></span>
+        :
+        <span id="sec"><%= ((@target_time - Time.now) % 60).floor.to_s.rjust(2, '0') %></span>
+    <% end %>
+  </p>
+
+  <% if @auction.is_started? %>
+      <strong>Problem:</strong>
+      <%= link_to @auction.problem.title, @auction.problem %>
+      <br>
+      <% last_bid = Bid.where("auction_id = ?", @auction.id).order(:created_at).last %>
+      <% if @auction.is_finished?() %>
+          Auction is finished!
+          <% if last_bid %>
+              <p>
+                <% last_bid.profile.won_auction(@auction.problem, last_bid) %>
+                Winner:  <%= link_to last_bid.profile.username, last_bid.profile %> with price <%= last_bid.price %>
+              </p>
+          <% end %>
+      <% else %>
+          <% if last_bid %>
+              <p>
+                <strong>Last Bid:</strong> <%= last_bid.price %>
+                by <%= link_to last_bid.profile.username, last_bid.profile %>
+              </p>
+          <% end %>
+          <br>
+          <a data-toggle="modal" data-target="#main-modal" class="btn btn-danger" id="new-bid">Bid</a>
+      <% end %>
+  <% else %>
+      <p>Auction hasn't been started yet!</p>
+  <% end %>
+  <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Edit', edit_auction_path(@auction), :class => 'btn btn-danger' %>
+  <% end %>
+  <%= link_to 'Back', auctions_path, :class => 'btn btn-primary' %>
+</div>
+
+<% content_for :extra_js do %>
+    <script type="text/javascript">
+        var s = -1, m = -1, h = -1, sd = $('#sec'), md = $('#min'), hd = $('#hour'),
+                myVar = setInterval(function () {
+                    myTimer()
+                }, 1000);
+
+        function normalize(t) {
+            if (t < 10 && t > 0)
+                return "0" + t;
+            if (t >= 10)
+                return t;
+            return "00";
+        }
+
+        function myTimer() {
+            if (s == -1) {
+                s = sd.text();
+                m = md.text();
+                h = hd.text();
+                if (s <= 0 || m <= 0 || h <= 0) {
+                    myStopFunction();
+                    return;
+                }
+            }
+            s--;
+            if (s == 0 && m == 0 && h == 0)
+                document.location.reload(true);
+            if (s < 0) {
+                s = 59;
+                m--;
+                md.text(normalize(m));
+            }
+            if (m < 0) {
+                m = 59;
+                h--;
+            }
+            if (h < 0) {
+                h = 23;
+                hd.text(normalize(h));
+            }
+            sd.text(normalize(s));
+        }
+
+        function myStopFunction() {
+            clearInterval(myVar);
+        }
+
+        $('#new-bid').click(function () {
+            $.get('<%= new_bid_path %>?auction_id=' + <%= @auction.id %>, function (data) {
+                $('#main-modal-body').html(data);
+            });
+        });
+    </script>
+<% end %>

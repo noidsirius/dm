@@ -22,8 +22,8 @@ module Utacm
     # config.i18n.default_locale = :de
 
     # Start faye server before start
-   Thread.new do
-     system('node faye.js')
-   end
+#   Thread.new do
+#     system('node faye.js')
+ #  end
   end
 end

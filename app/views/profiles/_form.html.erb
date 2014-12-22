@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="form-group">
-        <%= f.label :info, :class => 'col-sm-3 control-label' %>
+        <%= f.label :info ,"Student #:", :class => 'col-sm-3 control-label' %>
         <div class="col-sm-9">
           <%= f.text_area :info, :class => 'form-control', size: 'x2' %>
         </div>
@@ -55,9 +55,10 @@
       <div class="form-group">
         <%= f.label :about, :class => 'col-sm-3 control-label' %>
         <div class="col-sm-9">
-          <%= f.text_area :about, :class => 'form-control', size: 'x5' %>
+          <%= f.file_field :avatar, :id => 'avatar-input' %>
         </div>
       </div>
+
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
           <%= f.submit :class => 'btn btn-primary' %>

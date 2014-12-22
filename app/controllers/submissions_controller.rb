@@ -69,11 +69,15 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   # POST /submissions.json
   def create
+    if Submission.where("profile_id = ?", current_user.profile.id).where("problem_id = ?",params[:problem_id]).where("status = 0").any?
+      format.html { redirect_to Problem.find(params[problem_id]), notice: 'You have submitted before' }
+    end
     @submission = Submission.new(submission_params)
     @submission.profile_id = current_user.profile.id
 
     puts "XARE NOOB E SAG"
     puts params[:problem_id]
+
 
     respond_to do |format|
       if @submission.save

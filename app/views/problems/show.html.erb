@@ -42,7 +42,7 @@
            <%= @problem.Description %>
             </p>
             <p>
-            <% if @problem.attachment %>
+            <% if @problem.attachment.url %>
             Download the attachment <a href="/dm<%= @problem.attachment.url %>">here</a>
             <% end %>
             </p>
@@ -65,7 +65,7 @@
               <p>
 
                 <strong>Submission:</strong>
-                <%= submission.description %> <% if submission.attachment %>
+                <%= submission.description %> <% if submission.attachment.url %>
                     - <a href="/dm<%= submission.attachment.url %>"> Attachment </a>
                 <% end %>  - <%= submission.created_at %>
 

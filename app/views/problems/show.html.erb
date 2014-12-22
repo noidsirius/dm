@@ -43,7 +43,7 @@
             </p>
             <p>
             <% if @problem.attachment %>
-            Download the attachment <%= link_to "here", @problem.attachment.url %>
+            Download the attachment <a href="/dm<%= @problem.attachment.url %>">here</a>
             <% end %>
             </p>
         <% end %>

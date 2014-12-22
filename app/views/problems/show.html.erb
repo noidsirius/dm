@@ -38,7 +38,14 @@
             <%= link_to @problem.auction.name, @problem.auction %>
         <% else %>
           <strong>Description:</strong>
+            <p>
            <%= @problem.Description %>
+            </p>
+            <p>
+            <% if @problem.attachment %>
+            Download the attachment <%= link_to "here", @problem.attachment.url %>
+            <% end %>
+            </p>
         <% end %>
       </p>
    <% end %>

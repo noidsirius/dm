@@ -1,4 +1,7 @@
 class Problem < ActiveRecord::Base
+
+  mount_uploader :attachment, AttachmentUploader
+
   belongs_to :level
   #has_many :bought_problems
   #has_many :profiles , through: :bought_problems
@@ -34,9 +37,9 @@ class Problem < ActiveRecord::Base
     if self.profiles.include?(profile) or self.auction_mode?()
       return false
     end
-    if profile.problems.where("level_id = 1").count > 3 + profile.problems.where("level_id = 2").count * 2 + profile.problems.where("level_id = 3").count * 3
-      return false
-    end
+    #if profile.problems.where("level_id = 1").count > 3 + profile.problems.where("level_id = 2").count * 2 + profile.problems.where("level_id = 3").count * 3
+    #  return false
+    #end
     return true
   end
 

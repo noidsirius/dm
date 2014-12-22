@@ -3,7 +3,6 @@
 <% end %>
 <div class="profile">
   <div class="profile-picture">
-    <!--
     <% if current_user.profile == @profile %>
         <%= form_for @profile, url: {action: :show, :controller => 'profiles', :id => @profile}, method: :patch, html: {multipart: true, :id => 'form'} do |form| %>
             <div class="change-avatar-input">
@@ -12,9 +11,9 @@
             </div>
         <% end %>
     <% end %>
-    -->
+
     <% if @profile.avatar %>
-        <img id="profile-pic" src="<%= @profile.avatar.small.url %>" alt="<%= @profile.username %>'s avatar" data-at2x="<%= @profile.avatar.small_2x.url %>">
+        <img id="profile-pic" src="/dm/<%= @profile.avatar.small.url %>" alt="<%= @profile.username %>'s avatar" data-at2x="/dm/<%= @profile.avatar.small_2x.url %>">
     <% end %>
   </div>
   <div class="profile-info">

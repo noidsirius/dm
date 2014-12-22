@@ -34,37 +34,37 @@ class ApplicationController < ActionController::Base
     if self.class == ProfilesController
       @navbar[:second].append('<li class="active"><a href="/">Dashboard</a></li>')
     else
-      @navbar[:second].append('<li><a href="/">Dashboard</a></li>')
+      @navbar[:second].append('<li><a href="/dm">Dashboard</a></li>')
     end
     if self.class == ProblemsController
-      @navbar[:second].append('<li class="active"><a href="/problems">Problems</a></li>')
+      @navbar[:second].append('<li class="active"><a href="/dm/problems">Problems</a></li>')
     else
-      @navbar[:second].append('<li><a href="/problems">Problems</a></li>')
+      @navbar[:second].append('<li><a href="/dm/problems">Problems</a></li>')
     end
     if self.class == TeamsController
-      @navbar[:second].append('<li class="active"><a href="/scoreboard">ScoreBoard</a></li>')
+      @navbar[:second].append('<li class="active"><a href="/dm/scoreboard">ScoreBoard</a></li>')
     else
-      @navbar[:second].append('<li><a href="/scoreboard">ScoreBoard</a></li>')
+      @navbar[:second].append('<li><a href="/dm/scoreboard">ScoreBoard</a></li>')
     end
     if self.class == SubmissionsController
-      @navbar[:second].append('<li class="active"><a href="/submissions">Submissions</a></li>')
+      @navbar[:second].append('<li class="active"><a href="/dm/submissions">Submissions</a></li>')
     else
-      @navbar[:second].append('<li><a href="/submissions">Submissions</a></li>')
+      @navbar[:second].append('<li><a href="/dm/submissions">Submissions</a></li>')
     end
     if self.class == BidsController
-      @navbar[:second].append('<li class="active"><a href="/bids">bids</a></li>')
+      @navbar[:second].append('<li class="active"><a href="/dm/bids">bids</a></li>')
     else
-      @navbar[:second].append('<li><a href="/bids">Bids</a></li>')
+      @navbar[:second].append('<li><a href="/dm/bids">Bids</a></li>')
     end
     if self.class == AuctionsController
-      @navbar[:second].append('<li class="active"><a href="/auctions">Auctions</a></li>')
+      @navbar[:second].append('<li class="active"><a href="/dm/auctions">Auctions</a></li>')
     else
-      @navbar[:second].append('<li><a href="/auctions">Auctions</a></li>')
+      @navbar[:second].append('<li><a href="/dm/auctions">Auctions</a></li>')
     end
     if self.class == ChaptersController
-      @navbar[:second].append('<li class="active"><a href="/chapters">Chapters</a></li>')
+      @navbar[:second].append('<li class="active"><a href="/dm/chapters">Chapters</a></li>')
     else
-      @navbar[:second].append('<li><a href="/chapters">Chapters</a></li>')
+      @navbar[:second].append('<li><a href="/dm/chapters">Chapters</a></li>')
     end
   end
 

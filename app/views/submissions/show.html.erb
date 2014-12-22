@@ -20,7 +20,14 @@
 
 <p>
   <strong>Description:</strong>
+  <p>
   <%= @submission.description %>
+    </p>
+  <p>
+    <% if @submission.attachment %>
+        Download the attachment <a href="/dm<%= @submission.attachment.url %>">here</a>
+    <% end %>
+  </p>
 </p>
 
 <%= link_to 'Back', @submission.problem, :class => 'btn btn-danger' %>

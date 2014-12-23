@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body >
+  <p>
+Dear
+    <strong> <%= submission.profile.first_name %></strong>
+  </p>
+  <p>
+
+    <% if submission.status == 2 %>
+        Your submission has been accepted! You will earn <%= submission.problem.level.bounty %> credits. Solve more problem!
+    <% else %>
+        Your submission has been rejected! Don't be upset and try harder :)
+    <% end %>
+  </p>
+   </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body >
+  <p>
+Dear
+    <strong> <%= submission.profile.first_name %></strong>
+  </p>
+  <p>
+    Your submission has been received, the response will be ready soon. Please wait till tomorrow.
+  </p>
+  <h4>
+    Description:
+  </h4>
+    <p>
+        <%= submission.description %>
+  </p>
+  <% if submission.attachment.url %>
+      <h4>
+        Attachment:
+      </h4>
+      <p>
+        Download the attachment <a href="noid.ir/dm<%= submission.attachment.url %>">here</a>
+      </p>
+  <% end %>
+
+   </body>
+</html>

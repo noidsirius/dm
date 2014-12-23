@@ -33,6 +33,7 @@ class SubmissionsController < ApplicationController
     @submission.status = 2
     @submission.save
     Invoice.create!(profile_id: params[:pid], amount: @submission.problem.level.bounty)
+    UserMailer.submission_response(@submission).deliver
     redirect_to submissions_path
   end
 
@@ -43,6 +44,7 @@ class SubmissionsController < ApplicationController
     end
     @submission.status = 1
     @submission.save
+    UserMailer.submission_response(@submission).deliver
     redirect_to submissions_path
     #Invoice.create!(profile_id: params[:pid], amount: @submission.problem.level.bounty)
   end
@@ -84,6 +86,7 @@ class SubmissionsController < ApplicationController
 
     respond_to do |format|
       if @submission.save
+        UserMailer.submission_complete(@submission).deliver
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
         format.json { render :show, status: :created, location: @submission }
       else

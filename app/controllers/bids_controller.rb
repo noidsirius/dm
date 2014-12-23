@@ -43,6 +43,10 @@ class BidsController < ApplicationController
 
     respond_to do |format|
       if @bid.save
+        Bid.where(:auction => 1).map { |b| b.profile }.uniq.each do |p|
+          UserMailer.auction_change(@bid.auction,p.user,@bid).deliver
+        end
+
         format.html { redirect_to @bid, notice: 'Bid was successfully created.' }
         format.json { render :show, status: :created, location: @bid }
       else

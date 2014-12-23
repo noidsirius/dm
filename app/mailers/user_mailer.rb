@@ -43,6 +43,19 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def auction_change(auction, user, bid)
+    recipient = user.email
+    subject =
+        'UT DM - Auction ' + auction.name
+
+    puts 'Email: to => ' + recipient + ', subject => ' + subject
+    mail(to: recipient, subject: subject) do |format|
+      format.html { render 'auction_change' , :locals => {:profile => user.profile, :auction => auction, :bid => bid} }
+#      format.html { render 'welcome_message' }
+    end
+  end
+
+
   def start_register(profile, event)
     recipient = profile.user.email
     subject =

@@ -55,6 +55,9 @@ class SubmissionsController < ApplicationController
     end
     @submission.problem_id = params[:problem_id]
     @problem = Problem.find(@submission.problem_id)
+    unless @problem.can_submit(current_user.profile)
+      redirect_to @problem
+    end
     render layout: false
   end
 

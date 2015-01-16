@@ -30,8 +30,10 @@
   </p>
 </p>
 
+  <% if current_user.has_role?(:admin) %>
 <td><%= link_to 'Accept', {:controller => 'submissions', :action => 'accept', :id => String(@submission.id), :pid => String(@submission.profile.id)}, :back_to => submissions_path, :method => :put, :class => 'btn btn-primary follow-btn' %></td>
 <td><%= link_to 'Reject', {:controller => 'submissions', :action => 'reject', :id => String(@submission.id), :pid => String(@submission.profile.id)}, :back_to => submissions_path, :method => :put, :class => 'btn btn-primary follow-btn' %></td>
+      <% end%>
 
 <%= link_to 'Back', @submission.problem, :class => 'btn btn-danger' %>
 </div>

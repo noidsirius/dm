@@ -32,6 +32,10 @@
             <% if @problem.auction.is_started?() %>
                 <strong>Description:</strong>
                 <%= @problem.Description %>
+                <br>
+                <% if @problem.attachment.url %>
+                    Download the attachment <a href="/dm<%= @problem.attachment.url %>">here</a>
+                <% end %>
             <% end %>
             <br>
             Auction:

@@ -44,7 +44,7 @@ class SubmissionsController < ApplicationController
     end
     @submission.status = 1
     @submission.save
-    UserMailer.submission_response(@submission).deliver
+    #UserMailer.submission_response(@submission).deliver
     redirect_to submissions_path
     #Invoice.create!(profile_id: params[:pid], amount: @submission.problem.level.bounty)
   end

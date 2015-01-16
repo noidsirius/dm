@@ -74,6 +74,8 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   # POST /submissions.json
   def create
+    redirect_to problems_path
+    return
     if Submission.where("profile_id = ?", current_user.profile.id).where("problem_id = ?",params[:problem_id]).where("status = 0").any?
       format.html { redirect_to Problem.find(params[problem_id]), notice: 'You have submitted before' }
     end

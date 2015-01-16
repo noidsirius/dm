@@ -54,6 +54,8 @@ class TeamsController < ApplicationController
   end
 
   def scoreboard
+    redirect_to problem_path
+    return
     @profile = current_user.profile
     Profile.all.each do |p|
       p.credit = 0

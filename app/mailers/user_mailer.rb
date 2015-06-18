@@ -69,7 +69,7 @@ class UserMailer < ActionMailer::Base
 # #      format.html { render 'welcome_message' }
 #     end
   end
-  
+
 
 
 end

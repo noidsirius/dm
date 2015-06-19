@@ -60,7 +60,7 @@ class TeamsController < ApplicationController
       p.get_solved_problems.each do |psp|
         p.credit += psp.level.bounty
       end
-      get_unsolved_problems.each do |pup|
+      p.get_unsolved_problems.each do |pup|
         p.credit += pup.level.price / 2
       end
       p.save

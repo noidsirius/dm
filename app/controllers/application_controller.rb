@@ -86,15 +86,12 @@ class ApplicationController < ActionController::Base
     @start_time = DateTime.new(2015,6,19,9,30,0,'+430')
     @end_time = DateTime.new(2015,6,19,12,30,0,'+430')
 
-    @now_time = DateTime.now
-
-    if current_user and !current_user.profile.nil? and (controller_name != "welcome" and controller_name != "teams")
-      unless current_user.has_role?(:admin)
-        if @now_time < @start_time
-          redirect_to :controller => :welcome, :action => :index
-        elsif @now_time > @end_time
-          redirect_to :controller => :teams, :action => :scoreboard
-        end
+    @now_current_user.profile.nil? and (controller_name != "welcome" and controller_name != "teams")
+    unless current_user.has_role?(:admin)
+      if @now_time < @start_time
+        redirect_to :controller => :welcome, :action => :index
+      elsif @now_time > @end_time
+        redirect_to :controller => :teams, :action => :scoreboard
       end
     end
   end

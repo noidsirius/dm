@@ -56,6 +56,9 @@ class TeamsController < ApplicationController
   def scoreboard
     @profile = current_user.profile
     Profile.all.each do |p|
+      if p.updated_at < DateTime.now - 2.minutes
+        next
+      end
       p.credit = 0
       p.get_solved_problems.each do |psp|
         p.credit += psp.level.bounty

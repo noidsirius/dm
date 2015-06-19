@@ -9,7 +9,10 @@
     <%= @problem.level.name %>
     <strong>Price:</strong>
     <%= @problem.level.price %>
+    <strong>Buy Limit:</strong>
+    <%= @problem.buy_limit %>
     <strong>Bounty:</strong>
+
     <%= @problem.level.bounty %>
     <strong>Topics:</strong>
     <% @problem.chapters.each do |c|%>

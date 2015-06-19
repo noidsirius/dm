@@ -55,19 +55,19 @@ class TeamsController < ApplicationController
 
   def scoreboard
     @profile = current_user.profile
-    Profile.all.each do |p|
-      if p.updated_at > DateTime.now - 2.minutes
-        next
-      end
-      p.credit = 0
-      p.get_solved_problems.each do |psp|
-        p.credit += psp.level.bounty
-      end
-      p.get_unsolved_problems.each do |pup|
-        p.credit += pup.level.price / 2
-      end
-      p.save
-    end
+    # Profile.all.each do |p|
+    #   if p.updated_at > DateTime.now - 2.minutes
+    #     next
+    #   end
+    #   p.credit = 0
+    #   p.get_solved_problems.each do |psp|
+    #     p.credit += psp.level.bounty
+    #   end
+    #   p.get_unsolved_problems.each do |pup|
+    #     p.credit += pup.level.price / 2
+    #   end
+    #   p.save
+    # end
     #render :layout => "empty"
   end
   # DELETE /teams/1

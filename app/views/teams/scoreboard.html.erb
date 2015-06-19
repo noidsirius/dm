@@ -14,9 +14,9 @@
     <tbody>
     <% Profile.order(:credit).reverse.each do |profile| %>
         <tr>
-          <% if profile.user.has_role?(:admin)
-               continue
-             end %>
+          <% if profile.user.has_role?(:admin) %>
+               <% next %>
+            <%  end %>
           <td><%= profile.username %></td>
           <td><%= profile.credit %></td>
           <td><%= profile.get_credit %></td>

@@ -85,9 +85,8 @@ class ApplicationController < ActionController::Base
   def check_time
     @start_time = DateTime.new(2015,6,19,9,30,0,'+430')
     @end_time = DateTime.new(2015,6,19,12,30,0,'+430')
-    @now_time = DateTime.new(2015,6,19,13,30,0,'+430')
 
-    # @now_time = DateTime.now
+    @now_time = DateTime.now
 
     if current_user and (controller_name != "welcome" and controller_name != "teams")
       unless current_user.has_role?(:admin)

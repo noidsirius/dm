@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!, :navbar_init
   before_action :set_locale
+  before_action :check_time
+
 
   layout :layout_by_resource
 
@@ -79,4 +81,23 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
+
+  def check_time
+    @start_time = DateTime.new(2015,6,19,9,30,0,'+430')
+    @end_time = DateTime.new(2015,6,19,12,30,0,'+430')
+    @now_time = DateTime.new(2015,6,19,13,30,0,'+430')
+
+    # @now_time = DateTime.now
+
+    if current_user and (controller_name != "welcome" and controller_name != "teams")
+      unless current_user.has_role?(:admin)
+        if @now_time < @start_time
+          redirect_to :controller => :welcome, :action => :index
+        elsif @now_time > @end_time
+          redirect_to :controller => :teams, :action => :scoreboard
+        end
+      end
+    end
+  end
+
 end

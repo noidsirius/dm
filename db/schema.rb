@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141222203341) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "auctions", force: true do |t|
     t.string   "name"
     t.integer  "base_price"
@@ -64,36 +61,6 @@ ActiveRecord::Schema.define(version: 20141222203341) do
     t.datetime "release_time"
     t.boolean  "finished"
     t.time     "duration"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "event_translations", force: true do |t|
-    t.integer  "event_id",    null: false
-    t.string   "locale",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-    t.text     "description"
-    t.string   "sentence"
-    t.text     "summary"
-    t.string   "location"
-    t.string   "category"
-  end
-
-  add_index "event_translations", ["event_id"], name: "index_event_translations_on_event_id", using: :btree
-  add_index "event_translations", ["locale"], name: "index_event_translations_on_locale", using: :btree
-
-  create_table "events", force: true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.string   "sentence"
-    t.datetime "release_time"
-    t.text     "summary"
-    t.string   "location"
-    t.string   "category"
-    t.integer  "capacity"
-    t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -151,7 +118,7 @@ ActiveRecord::Schema.define(version: 20141222203341) do
     t.integer  "credit"
   end
 
-  add_index "profiles", ["username"], name: "index_profiles_on_username", unique: true, using: :btree
+  add_index "profiles", ["username"], name: "index_profiles_on_username", unique: true
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -161,13 +128,13 @@ ActiveRecord::Schema.define(version: 20141222203341) do
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "submissions", force: true do |t|
     t.integer  "profile_id"
     t.integer  "problem_id"
-    t.integer  "status"
+    t.integer  "status",      default: 0
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -200,15 +167,15 @@ ActiveRecord::Schema.define(version: 20141222203341) do
     t.string   "uid"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "users_roles", id: false, force: true do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
 
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"
@@ -222,7 +189,7 @@ ActiveRecord::Schema.define(version: 20141222203341) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
 
 end

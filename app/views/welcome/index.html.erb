@@ -1,0 +1,16 @@
+<div class="col-lg-10 col-lg-offset-1 box">
+
+  <% if @now_time < @start_time %>
+      <div style="direction: rtl"%>
+
+      مسابقه ساعت
+      <%=@start_time.strftime("%H:%M") %>
+      شروع می‌شود.
+
+</div>
+  <% elsif @now_time > @end_time %>
+      EE
+  <% else %>
+      RR
+  <% end %>
+</div>

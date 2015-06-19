@@ -34,7 +34,7 @@ class Problem < ActiveRecord::Base
   end
 
   def can_buy(profile)
-    if self.profiles.include?(profile) or self.auction_mode?()
+    if self.profiles.include?(profile) or self.auction_mode?() or self.profiles.count > self.buy_limit
       return false
     end
     #if profile.problems.where("level_id = 1").count > 3 + profile.problems.where("level_id = 2").count * 2 + profile.problems.where("level_id = 3").count * 3

@@ -78,7 +78,7 @@ class Profile < ActiveRecord::Base
 
   def buy(problem)
     if problem
-      if self.problems.include?(problem) or problem.auction_mode?()
+      if self.problems.include?(problem) or problem.auction_mode?() or problem.profiles.count > problem.buy_limit
         return false
       else
         #self.credit -= problem.level.price

@@ -71,12 +71,12 @@ class ApplicationController < ActionController::Base
   end
 
   def layout_by_resource
-    'empty'
-    # if devise_controller?
-    #   'bg'
-    # else
-    #   'application'
-    # end
+    # 'empty'
+    if devise_controller?
+      'bg'
+    else
+      'application'
+    end
   end
 
   def set_locale
@@ -89,20 +89,20 @@ class ApplicationController < ActionController::Base
 
     @now_time = DateTime.now
     # if controller_name != "welcome"
-      render 'welcome/index'
-      return
-      # redirect_to :controller => :welcome, :action => :index
+    #   render 'welcome/index'
+    #   return
+    #   # redirect_to :controller => :welcome, :action => :index
     # end
 
-    # if current_user and !current_user.profile.nil? and (controller_name != "welcome" and controller_name != "teams")
-    #   unless current_user.has_role?(:admin)
-    #     if @now_time < @start_time
-    #       redirect_to :controller => :welcome, :action => :index
-    #     elsif @now_time > @end_time
-    #       redirect_to :controller => :teams, :action => :scoreboard
-    #     end
-    #   end
-    # end
+    if current_user and !current_user.profile.nil? and (controller_name != "welcome" and controller_name != "teams")
+      unless current_user.has_role?(:admin)
+        if @now_time < @start_time
+          redirect_to :controller => :welcome, :action => :index
+        elsif @now_time > @end_time
+          redirect_to :controller => :teams, :action => :scoreboard
+        end
+      end
+    end
   end
 
 end

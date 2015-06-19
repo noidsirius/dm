@@ -71,11 +71,12 @@ class ApplicationController < ActionController::Base
   end
 
   def layout_by_resource
-    if devise_controller?
-      'bg'
-    else
-      'application'
-    end
+    'empty'
+    # if devise_controller?
+    #   'bg'
+    # else
+    #   'application'
+    # end
   end
 
   def set_locale

@@ -161,10 +161,10 @@ class ProfilesController < ApplicationController
   end
 
   def add_redis_user_auth
-    channel = String(current_user.id)
-    digest = Digest::SHA1.hexdigest(channel)
-    if $redis.get('/notifications/' + channel) == nil or $redis.get('/notifications/' + channel) != digest
-      $redis.set('/notifications/' + channel, digest)
-    end
+    # channel = String(current_user.id)
+    # digest = Digest::SHA1.hexdigest(channel)
+    # if $redis.get('/notifications/' + channel) == nil or $redis.get('/notifications/' + channel) != digest
+    #   $redis.set('/notifications/' + channel, digest)
+    # end
   end
 end

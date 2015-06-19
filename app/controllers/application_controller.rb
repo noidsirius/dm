@@ -87,11 +87,11 @@ class ApplicationController < ActionController::Base
     @end_time = DateTime.new(2015,6,19,12,30,0,'+430')
 
     @now_time = DateTime.now
-    if controller_name != "welcome"
+    # if controller_name != "welcome"
       render 'welcome/index'
       return
       # redirect_to :controller => :welcome, :action => :index
-    end
+    # end
 
     # if current_user and !current_user.profile.nil? and (controller_name != "welcome" and controller_name != "teams")
     #   unless current_user.has_role?(:admin)

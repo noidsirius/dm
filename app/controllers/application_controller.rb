@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
 
     @now_time = DateTime.now
 
-    if current_user and (controller_name != "welcome" and controller_name != "teams")
+    if current_user and !current_user.profile.nil? and (controller_name != "welcome" and controller_name != "teams")
       unless current_user.has_role?(:admin)
         if @now_time < @start_time
           redirect_to :controller => :welcome, :action => :index

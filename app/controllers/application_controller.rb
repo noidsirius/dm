@@ -34,39 +34,39 @@ class ApplicationController < ActionController::Base
     @navbar[:second] = []
 
     if self.class == ProfilesController
-      @navbar[:second].append('<li class="active"><a href="/">Dashboard</a></li>')
+      @navbar[:second].append("<li class='active'><a href='#{url_for root_path}'>Dashboard</a></li>")
     else
-      @navbar[:second].append('<li><a href="/dm">Dashboard</a></li>')
+      @navbar[:second].append("<li><a href='#{url_for root_path}'>Dashboard</a></li>")
     end
     if self.class == ProblemsController
-      @navbar[:second].append('<li class="active"><a href="/dm/problems">Problems</a></li>')
+      @navbar[:second].append("<li class='active'><a href='#{url_for problems_path}'>Problems</a></li>")
     else
-      @navbar[:second].append('<li><a href="/dm/problems">Problems</a></li>')
+      @navbar[:second].append("<li><a href='#{url_for problems_path}'>Problems</a></li>")
     end
     if self.class == TeamsController
-      @navbar[:second].append('<li class="active"><a href="/dm/scoreboard">ScoreBoard</a></li>')
+      @navbar[:second].append("<li class='active'><a href='#{url_for scoreboard_path}'>ScoreBoard</a></li>")
     else
-      @navbar[:second].append('<li><a href="/dm/scoreboard">ScoreBoard</a></li>')
+      @navbar[:second].append("<li><a href='#{url_for scoreboard_path}'>ScoreBoard</a></li>")
     end
     if self.class == SubmissionsController
-      @navbar[:second].append('<li class="active"><a href="/dm/submissions">Submissions</a></li>')
+      @navbar[:second].append("<li class='active'><a href='#{url_for submissions_path}'>Submissions</a></li>")
     else
-      @navbar[:second].append('<li><a href="/dm/submissions">Submissions</a></li>')
+      @navbar[:second].append("<li><a href='#{url_for submissions_path}'>Submissions</a></li>")
     end
     if self.class == BidsController
-      @navbar[:second].append('<li class="active"><a href="/dm/bids">bids</a></li>')
+      @navbar[:second].append("<li class='active'><a href='#{url_for bids_path}'>bids</a></li>")
     else
-      @navbar[:second].append('<li><a href="/dm/bids">Bids</a></li>')
+      @navbar[:second].append("<li><a href='#{url_for bids_path}'>bids</a></li>")
     end
     if self.class == AuctionsController
-      @navbar[:second].append('<li class="active"><a href="/dm/auctions">Auctions</a></li>')
+      @navbar[:second].append("<li class='active'><a href='#{url_for auctions_path}'>Auctions</a></li>")
     else
-      @navbar[:second].append('<li><a href="/dm/auctions">Auctions</a></li>')
+      @navbar[:second].append("<li><a href='#{url_for auctions_path}'>Auctions</a></li>")
     end
     if self.class == ChaptersController
-      @navbar[:second].append('<li class="active"><a href="/dm/chapters">Chapters</a></li>')
+      @navbar[:second].append("<li class='active'><a href='#{url_for chapters_path}'>Chapters</a></li>")
     else
-      @navbar[:second].append('<li><a href="/dm/chapters">Chapters</a></li>')
+      @navbar[:second].append("<li><a href='#{url_for chapters_path}'>Chapters</a></li>")
     end
   end
 
@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_time
-    @start_time = DateTime.new(2015,6,19,10,15,0,'+430')
+    @start_time = DateTime.new(2015,6,22,10,15,0,'+430')
     @end_time = DateTime.new(2015,6,19,12,30,0,'+430')
     @now_time = DateTime.now
 
@@ -97,9 +97,9 @@ class ApplicationController < ActionController::Base
     if current_user and !current_user.profile.nil? and (controller_name != "welcome" and controller_name != "teams")
       unless current_user.has_role?(:admin)
         if @now_time < @start_time
-          redirect_to :controller => :welcome, :action => :index
+          redirect_to welcome_index_path
         elsif @now_time > @end_time
-          redirect_to :controller => :teams, :action => :scoreboard
+          redirect_to scoreboard_path
         end
       end
     end

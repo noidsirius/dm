@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  get 'welcome/index', :as => 'welcome_index'
 
-  get 'scoreboard/index'
 
   resources :bids
 
@@ -37,7 +36,7 @@ Rails.application.routes.draw do
 
   resources :profiles
 
-  get '/scoreboard' => 'teams#scoreboard'
+  get '/scoreboard' => 'teams#scoreboard' , :as => 'scoreboard'
   put '/submissions/accept/:id/:pid' => 'submissions#accept'
   put '/submissions/reject/:id/:pid' => 'submissions#reject'
   root to: 'profiles#index'

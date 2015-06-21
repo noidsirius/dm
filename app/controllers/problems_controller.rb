@@ -4,7 +4,8 @@ class ProblemsController < ApplicationController
   # GET /problems
   # GET /problems.json
   def index
-    @problems = Problem.all
+    @problems = []
+    # @problems = Problem.all
   end
 
   # GET /problems/1

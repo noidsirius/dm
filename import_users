@@ -1,0 +1,7 @@
+text=File.open('people.csv').read
+text.gsub!(/\r\n?/, "\n")
+text.each_line do |line|
+  email , password = line.split(',')
+  password = password.strip
+  User.create!(:email => email, :password => password)
+end

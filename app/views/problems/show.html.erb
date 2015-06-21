@@ -37,7 +37,7 @@
                 <%= @problem.Description %>
                 <br>
                 <% if @problem.attachment.url %>
-                    Download the attachment <a href="/dm<%= @problem.attachment.url %>">here</a>
+                    Download the attachment <%=link_to "here", @problem.attachment.url %>
                 <% end %>
             <% end %>
             <br>
@@ -50,7 +50,7 @@
             </p>
             <p>
             <% if @problem.attachment.url %>
-            Download the attachment <a href="/dm<%= @problem.attachment.url %>">here</a>
+                  Download the attachment <%=link_to "here", @problem.attachment.url %>
             <% end %>
             </p>
         <% end %>
@@ -83,14 +83,20 @@
   <% if @problem.can_buy(current_user.profile) %>
       <%= link_to 'Buy', {:controller => 'problems', :action => 'buy', :id => String(@problem.id)}, :back_to => @problem, :method => :put, :class => 'btn btn-primary follow-btn' %>
   <% end %>
-</div>
-<% if current_user.has_role?(:admin) %>
-    <%= @problem.Description %>
-    <br>
+
+  <% if current_user.has_role?(:admin) %>
+        <hr>
+      Admin Mode:
+      <br>
+      <%= @problem.Description %>
+      <br>
       <% if @problem.attachment.url %>
-          Download the attachment <a href="/dm<%= @problem.attachment.url %>">here</a>
+          Download the attachment <%=link_to "here", @problem.attachment.url %>
+
       <% end %>
-<% end %>
+  <% end %>
+
+</div>
 
 <% content_for :extra_js do %>
     <script type="text/javascript" language="JavaScript">

@@ -1,6 +1,7 @@
 class Profile < ActiveRecord::Base
   before_validation :username_downcase
-
+  validates :username, format: { with: /\A[a-zA-Z0-9]+\z/,
+                                    message: "only allows letters and numbers" }
   after_create :set_credit
 
   def set_credit

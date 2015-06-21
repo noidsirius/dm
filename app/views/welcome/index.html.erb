@@ -2,14 +2,12 @@
 
   <% if @now_time < @start_time %>
       <div style="direction: rtl"%>
-مسابقه‌ی تست یک‌شنبه از ساعت
+مسابقه‌ی اصلی، دوشنبه از ساعت
         <%=@start_time.strftime("%H:%M") %>
 تا ساعت
         <%=@end_time.strftime("%H:%M") %>
 برگزار می‌شود.
 
-        <br>
-سایت در حال تست است، از همکاری شما سپاسگزارم.
 </div>
   <% elsif @now_time > @end_time %>
       EE

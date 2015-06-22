@@ -101,7 +101,7 @@
 <% content_for :extra_js do %>
     <script type="text/javascript" language="JavaScript">
         $('#submit-btn').click(function () {
-            $.get('/dm-test/submissions/new?problem_id=' + <%= @problem.id %>, function (data) {
+            $.get('/dm/submissions/new?problem_id=' + <%= @problem.id %>, function (data) {
                 $('#main-modal-body').html(data);
             });
         });

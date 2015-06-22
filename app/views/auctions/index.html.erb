@@ -9,6 +9,8 @@
     <thead>
     <tr>
       <th>Name</th>
+      <th>Last Bid</th>
+      <th>Last Bidder</th>
       <th>Base price</th>
       <th>Start time</th>
       <th>End time</th>
@@ -22,6 +24,18 @@
     <% @auctions.each do |auction| %>
         <tr>
           <td><%=link_to auction.name, auction %></td>
+          <% last_bid = Bid.where("auction_id = ?", @auction.id).order(:created_at).last %>
+          <% if last_bid %>
+              <td>
+                <%= last_bid.price %>
+              </td>
+              <td>
+                <%= last_bid.profile.username %>
+              </td>
+          <% else %>
+              <td>-</td>
+              <td>-</td>
+          <% end %>
           <td><%= auction.base_price %></td>
           <td><%= auction.start_time.in_time_zone('Tehran').to_s(:time) %></td>
           <td><%= auction.end_time.in_time_zone('Tehran').to_s(:time) %></td>

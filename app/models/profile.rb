@@ -86,6 +86,9 @@ class Profile < ActiveRecord::Base
         if problem.auction_mode?()
           Bid.where("id = ?",problem.auction.bids.order(:created_at).last.id).update_all("status = 2")
         else
+          if problem.level.price > get_credit
+            return false
+          end
           Invoice.create!(profile_id: id, amount: -problem.level.price)
         end
         self.problems << problem

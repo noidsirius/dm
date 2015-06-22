@@ -52,6 +52,8 @@
               <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
             </li>
 
+
+
           </ul>
         </div>
       </div>
@@ -72,6 +74,9 @@
                 <% @navbar[:second].each do |entry| %>
                     <%= entry.html_safe %>
                 <% end %>
+                <li>
+                  Current Time: <%=@now_time.strftime("%H:%M:%S") %>
+                </li>
               </ul>
             </div>
           </div>

@@ -73,7 +73,7 @@
 
                 <strong>Submission:</strong>
                 <%= submission.description %> <% if submission.attachment.url %>
-                    - <a href="/dm<%= submission.attachment.url %>"> Attachment </a>
+                    - <a href="<%= submission.attachment.url %>"> Attachment </a>
                 <% end %>  - <%= submission.created_at %>
 
               </p>

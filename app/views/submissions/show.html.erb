@@ -25,7 +25,7 @@
     </p>
   <p>
     <% if @submission.attachment.url %>
-        Download the attachment <a href="/dm<%= @submission.attachment.url %>">here</a>
+        Download the attachment <a href="<%= @submission.attachment.url %>">here</a>
     <% end %>
   </p>
 </p>

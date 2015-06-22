@@ -24,7 +24,7 @@
     <% @auctions.each do |auction| %>
         <tr>
           <td><%=link_to auction.name, auction %></td>
-          <% last_bid = Bid.where("auction_id = ?", @auction.id).order(:created_at).last %>
+          <% last_bid = Bid.where("auction_id = ?", auction.id).order(:created_at).last %>
           <% if last_bid %>
               <td>
                 <%= last_bid.price %>

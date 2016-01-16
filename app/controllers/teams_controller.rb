@@ -68,6 +68,7 @@ class TeamsController < ApplicationController
       end
       p.save
     end
+    # render layout: "empty"
     #render :layout => "empty"
   end
   # DELETE /teams/1

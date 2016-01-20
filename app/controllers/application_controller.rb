@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_time
-    @start_time = DateTime.new(2016,1,20,10,0,0,'+430')
+    @start_time = DateTime.new(2016,1,20,10,15,0,'+430')
     @end_time = DateTime.new(2016,1,20,13,0,0,'+430')
     @now_time = DateTime.now
 
